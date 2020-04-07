@@ -1,0 +1,46 @@
+{% extends "./base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <br>
+            <br>
+            <br>
+            
+            <br><br>
+            
+            <form action="/admin" method = "POST">
+                
+                Input INDEX of which you want to set privilages
+                <br>
+                <input name = "index" type = "number" id = "index">
+                <br><br>
+                Select the fields you want to give privilage with coma separation
+                <br>
+                Below given are available options
+                <br><br>
+               
+               
+                    {% for key , value in dictionary.items %}
+                        
+                        {% if value != None and key != "number_of_fields" %}
+                        <li>{{value}}</li>
+                        
+                        {% endif %}
+                    {% endfor %}
+                
+               
+                <br><br>
+                <input name = "fields" type = "text" id = "fields">
+                <br><br>
+                <input type="submit">
+                <br><br>
+
+                <a href = "/clearPath" > clear earlier privilages </a>
+
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock %}

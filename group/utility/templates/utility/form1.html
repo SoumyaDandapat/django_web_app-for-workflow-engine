@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form id="login-form" class="form" action="\get_data" method="POST">
+        {% csrf_token %}
+<div class="container1">
+   
+<button class="add_form_field">Add Name &nbsp; <span style="font-size:16px; font-weight:bold;"> </span></button>
+
+</div>
+<br></br>
+  <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+    </form>
+
+<button onclick="myFunction()"> show name </button>
+<p id ="demo"> my name </p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+
+ function myFunction() {
+  var firstName = document.getElementsByName("fname")[0].value;
+  document.getElementById("demo").innerHTML = firstName;
+}
+
+$(document).ready(function() {
+    var max_fields      = 10;
+    var wrapper         = $(".container1");
+    var add_button      = $(".add_form_field");
+ 
+    var x = 1;
+    $(add_button).click(function(e){
+        e.preventDefault();
+        if(x < max_fields){
+            x++;
+            $(wrapper).append(
+            '<div id="myForm"><label for="fname">First name:</label><input type="text" id="fname" name="fname"/><label for="lname">Last name:</label><input type="text" id="lname" name="lname"><br><br><a href="#" class="delete">Delete</a></div>'
+            ); //add input box
+        }
+  else
+  {
+  alert('You Reached the limits')
+  }
+    });
+ 
+    $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
+</body>
+</html>
+

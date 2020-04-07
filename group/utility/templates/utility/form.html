@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form id="login-form" class="form" action="\get_data" method="POST">
+        {% csrf_token %}
+<div class="container1">
+  
+<div id = "remove" class = "container2" id ="get_data">  
+<button class="add_form_field">Add Name &nbsp; <span style="font-size:16px; font-weight:bold;"> </span></button>
+<br><br>
+<button class="add_data"  >Add Field &nbsp;</button> <span style="font-size:16px; font-weight:bold;"> </span></button>
+<button class="add_form_email">Add mailid &nbsp; <span style="font-size:16px; font-weight:bold;"> </span></button>
+   
+</div>
+
+</div>
+<br></br>
+  <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+    </form>
+<div id="remove">
+<button onclick="save()"> save </button>    
+<button onclick="myFunction()"> show name </button>
+</div>
+<p id ="demo"> my name </p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+
+ var i =1;
+ var j =1;
+
+$(document).ready(function() {
+    var max_fields      = 10;
+    var wrapper         = $(".container1");
+    var add_button      = $(".add_data");
+ 
+    var x = 1;
+    $(add_button).click(function(e){
+        e.preventDefault();
+        var field_name = "field_name" +i;
+        i++;
+        document.getElementById("demo").innerHTML = field_name;
+        if(x < max_fields){
+            x++;
+            $(wrapper).append(
+            '<div id="myForm"><label for="field_name">add field name:</label><input type="text" id="field_name" name="'+field_name+'"/><br><div id = "remove"><a href="#" class="delete">Delete</a></div></div>'
+            ); //add input box
+        }
+  else
+  {
+  alert('You Reached the limits')
+  }
+    });
+ 
+    $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+$(document).ready(function() {
+    var max_fields      = 10;
+    var wrapper         = $(".container1");
+    var add_button      = $(".add_form_field");
+ 
+    var x = 1;
+    $(add_button).click(function(e){
+        e.preventDefault();
+        if(x < max_fields){
+            x++;
+            $(wrapper).append(
+            '<div id="myForm"><label for="fname">First name:</label><input type="text" id="fname" name="fname"/><label for="lname">Last name:</label><input type="text" id="lname" name="lname"><br><div id = "remove"><a href="#" class="delete">Delete</a></div></div>'
+            ); //add input box
+        }
+  else
+  {
+  alert('You Reached the limits')
+  }
+    });
+ 
+    $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+$(document).ready(function() {
+    var max_fields      = 10;
+    var wrapper         = $(".container1");
+    var add_button      = $(".add_form_email");
+ 
+    var x = 1;
+    $(add_button).click(function(e){
+        var temp = document.getElementsByName("field_name"+j)[0].value;
+        j++;
+        //var temp = document.getElementById("field_name").value;
+        e.preventDefault();
+        if(x < max_fields){
+            x++;
+            $(wrapper).append(
+            '<div id="myForm"><label for="mailid">'+temp+'</label><input type="text" id="mailid" name="'+temp+'"/><br><div id = "remove"><a href="#" class="delete">Delete</a></div></div>'
+            ); //add input box
+        }
+  else
+  {
+  alert('You Reached the limits')
+  }
+    });
+ 
+    $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+function save() {
+  var myobj = document.getElementById("remove");
+  while(myobj != null)
+  {
+      myobj.remove();
+      myobj = document.getElementById("remove");
+  }
+}
+
+</script>
+</body>
+</html>
+
