@@ -13,7 +13,11 @@
                 
                 Input INDEX of which you want to set privilages
                 <br>
-                <input name = "index" type = "number" id = "index">
+                <input name = "index" type = "number" id = "index" min="1" max="{{dictionary.number_of_fields}}">
+                <br><br>
+                Input user email at the INDEX
+                <br>
+                <input name = "user" type = "email" id = "user">
                 <br><br>
                 Select the fields you want to give privilage with coma separation
                 <br>

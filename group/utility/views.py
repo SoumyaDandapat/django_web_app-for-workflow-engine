@@ -231,17 +231,28 @@ def admin(request):
         print(y[0])
         return render(request,'utility/admin.html',{'dictionary': context})
     elif request.method == "POST":
+        fnd = False
         index = request.POST.get('index')
+        user =  request.POST.get('user')
         fields = request.POST.get('fields')
         fields = [x.strip() for x in fields.split(',')]
-        if(len(fields)!=0):
-            privilage.insert_one({"index":index,"fields":fields})
+        for obj in privilage.find():
+            if obj['index'] == index :
+                print("updating")
+                privilage.update({"index":index},{'index':index,'user_email':user,'fields':fields})
+                fnd = True
+        if not fnd :
+            print(fnd)
+            privilage.insert_one({'index':index,'user_email':user,'fields':fields})
+        
         for obj in privilage.find():
             if obj['index'] == index :
                 print(obj)
+
         print(index)
         print(fields)
-        request.method = "GET"
+        print(user)
+        
         return render(request,'utility/admin.html',{'dictionary': context})
 
     
