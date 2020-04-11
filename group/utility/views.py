@@ -214,12 +214,12 @@ def see_all_requests(request):
     print(fields)
     print(index)
     
-    ob = db_comment.find({"index":str(index),"status":"pending.."})
+    ob = collection1.find({"index":str(index),"status":"pending.."})
     print(ob.count())
     data1 = []
     for tmp in ob:
-        data1.append(tmp['form_id'])
-        print(tmp['form_id'])
+        data1.append(tmp.get('form_id'))
+        print(tmp.get('form_id'))
     print(data1)
     data3 = {}
     data3['pendindids'] = data1
@@ -273,8 +273,9 @@ def detailsofformid(request,form_id):
     data['is_generator'] = is_generator
     data['form_id'] = form_id
     ob =db_comment.find_one({"form_id":form_id,"index":index})
-    if ob['status']=="rejected" or ob['status'] == "accepted":
-        data['terminated'] = True
+    if ob is not None:
+        if ob['status']=="rejected" or ob['status'] == "accepted":
+            data['terminated'] = True
     ob = new_form.find_one({"form_id":form_id})
     for field in fields :
         data[field] = ob[field]
@@ -432,7 +433,7 @@ def post_login(request):
             
     if ob.count()>0:
         for tmp in ob:
-            if tmp['status']!="accepted" and tmp['status'] != "rejected":
+            if tmp['status']!="accepted" and tmp['status'] != "rejected" :
                 data['pending_form'] = True
     
     print(data)
