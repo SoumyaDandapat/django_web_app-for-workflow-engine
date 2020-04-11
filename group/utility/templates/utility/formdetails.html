@@ -1,0 +1,52 @@
+{% extends "./base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">    
+    {% for field in data.fields %}
+   
+        {% for key , value in data.items %}
+        {% if key == field %}
+        <li>{{key}}    {{value}}</li>
+        {% endif %}
+        {% endfor %}
+        
+    {% endfor %}
+    <br><br>
+    {% if data.comment %}
+    Following is the latest comment : 
+    {{data.comment|last}}
+        {% endif %}
+        <br><br>
+    {% if data.reply %}
+        Following is the latest reply sent :
+        {{data.reply|last}}
+        {% endif %}
+    <br><br>
+    {% if data.conversation %}
+        Whole conversation as follows : <br>
+        {% for items in data.conversation %}
+            <li>
+                Comment is : {{items.comment}}</li>
+                <li>Reply is :{{items.reply}}   </li>
+                <br>
+            
+        {% endfor %}
+    {% endif %}
+    
+    <br><br><br><br>
+            {% if not data.terminated %}
+            <form action = "sendBackForReview/{{data.form_id}}" method = "POST">
+                {% csrf_token %}
+                <textarea name="comment" id="comment" cols="30" rows="10">insert your comment</textarea>
+                <br><br>
+                <button type="submit" class="btn btn-primary">Send back for review </button>
+                <button type = "submit" class="btn btn-primary"  method = "POST" formaction="accept/{{data.form_id}}">Accept</button>
+                <button type = "submit" class="btn btn-primary"  method = "POST" formaction="reject/{{data.form_id}}">Reject</button>
+            </form>
+            {% endif %}
+            <br>
+    </div>
+    </div>
+    </div> 
+{% endblock %}

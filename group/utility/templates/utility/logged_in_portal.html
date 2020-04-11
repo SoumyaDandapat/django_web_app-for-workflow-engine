@@ -1,0 +1,37 @@
+{% extends "./base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <br>
+
+            {% if not data.pending_form %}
+            <a href = "/generate_new_application" >generate new application</a>
+            <br><br>
+            {% else %}
+            <a href = "/see_form_status" >see status of the form</a>
+            <br><br>
+            {% endif %}
+
+            {% if data.moderator %}
+            <a href = "/see_all_requests" >See the requests to you</a>
+            <br><br>
+            {% endif %}
+
+            <a href = "/see_records" >See all the records</a>
+            <br><br>
+
+
+            <br>
+            <br>
+            
+            
+        </div>
+
+        
+
+    </div>
+</div>
+
+{% endblock %}

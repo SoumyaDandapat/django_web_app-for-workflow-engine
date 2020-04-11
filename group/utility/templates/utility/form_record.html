@@ -1,0 +1,16 @@
+{% extends "./base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            {% for ids in data.ids %}
+                <li>
+                    <a class="btn btn-primary" href="/fd_to_user/{{ids}} ">
+                        {{ ids }}
+                    </a>
+                </li>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

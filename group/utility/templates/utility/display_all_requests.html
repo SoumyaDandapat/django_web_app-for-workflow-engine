@@ -1,0 +1,59 @@
+{% extends "./base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            {% if data.pendindids %}
+                Following are pending requests :
+                <br>
+                {% for ids in data.pendindids %}
+                <li>
+                    <a class="btn btn-primary" href="/detailsofformid/{{ids}} ">
+                        {{ ids }}
+                    </a>
+                </li>
+                {% endfor %}
+            {% endif %}
+            <br><br>
+            {% if data.send_back %}
+                Following are send back requests :
+                <br>
+                {% for ids in data.send_back %}
+                <li>
+                    <a class="btn btn-primary" href="/detailsofformid/{{ids}} ">
+                        {{ ids }}
+                    </a>
+                </li>
+                {% endfor %}
+            {% endif %}
+            <br><br>
+            {% if data.accepted %}
+                Following are accepted requests :
+                <br>
+                {% for ids in data.accepted %}
+                <li>
+                    <a class="btn btn-primary" href="/detailsofformid/{{ids}} ">
+                        {{ ids }}
+                    </a>
+                </li>
+                {% endfor %}
+            {% endif %}
+            <br><br>
+            {% if data.rejected %}
+                Following are rejected requests :
+                <br>
+                {% for ids in data.rejected %}
+                <li>
+                    <a class="btn btn-primary" href="/detailsofformid/{{ids}} ">
+                        {{ ids }}
+                    </a>
+                </li>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+        </div>
+        </div>
+    
+    
+{% endblock %}

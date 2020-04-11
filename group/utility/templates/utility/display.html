@@ -1,0 +1,40 @@
+{% extends "./base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            {% for field in data.fields %}
+                {% for key , value in data.items %}
+                    {% if key == field %}
+                        <li>{{key}} {{value}}</li>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            <br><br>
+            {% if data.send_back %}
+                Your Form has been send back for review
+                <br>
+                send back by {{data.moderator}}
+                <br>
+                latest comment is  :  {{data.comment}}
+                <br><br> 
+
+                <form id="login-form" class="form" action="/reply/{{data.form_id}}" method="POST">
+                    {% csrf_token %}
+
+                    <textarea name="comment" id="comment" cols="30" rows="10">insert your reply</textarea>
+                    <br><br>
+                    <input type="submit" class="btn btn-info btn-md" value="submit">
+                </form>
+            {% else %}
+                Your Form is {{data.status}} <br>
+                Moderator  {{data.moderator}}
+            {% endif %}
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

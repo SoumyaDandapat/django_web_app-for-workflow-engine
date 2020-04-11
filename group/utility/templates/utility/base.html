@@ -29,7 +29,20 @@
 
             </ul>
 
-            
+            <ul class="nav navbar-nav ml-auto">
+                {% if request.session.session_key %} 
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"><span class="fas fa-sign-in-alt"></span> Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/index"><span class="fas fa-sign-in-alt"></span> Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin"><span class="fas fa-sign-in-alt"></span> Admin</a>
+                </li>
+                {% endif %}
+            </ul>
 
         </div>
     </nav>

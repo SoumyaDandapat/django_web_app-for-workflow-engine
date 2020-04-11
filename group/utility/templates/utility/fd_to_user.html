@@ -1,0 +1,35 @@
+{% extends "./base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            {% if data.comments %}
+                comments by moderators :
+                <br>
+                {% for key , values in data.comments.items %}
+                    index {{key}} Comments<br>
+                    {% for value in values %}
+                        <li>{{value}}</li>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            <br><br>
+            {% if data.replies %}
+                replies by users :
+                <br>
+                {% for key , values in data.replies.items %}
+                    Replies to index {{key}} <br>
+                    {% for value in values %}
+                        <li>{{value}}</li>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            <br><br>
+            Form has status {{data.status}}
+            <br>
+            <br>
+            index : {{data.index}}
+        </div>
+    </div>
+</div>
+{% endblock %}        

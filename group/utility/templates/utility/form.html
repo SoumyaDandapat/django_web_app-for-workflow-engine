@@ -1,7 +1,9 @@
+{% extends "./base.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html>
 <body>
-
+  
 <form id="login-form" class="form" action="\get_data" method="POST">
         {% csrf_token %}
 <div class="container1">
@@ -121,6 +123,8 @@ function save() {
 }
 
 </script>
+
 </body>
 </html>
+{% endblock %}
 

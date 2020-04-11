@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+   
+    
+    <ul>
+        {% for key, value in dictionary.items %}
+            <li><b>{{key}}</b>: <a href="\user_detail">{{value}}</a>  </li>
+        {% endfor %}
+    </ul>
+
+    
+    
+
+<br><br>
+
+<h2> Comments </h2>
+<br><br>
+
+{% for comment in comments %}
+    <h3> {{comment}} </h3>
+{% endfor %}
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+
+
+</body>
+</html>
