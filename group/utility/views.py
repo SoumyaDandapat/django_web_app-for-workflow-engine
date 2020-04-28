@@ -115,10 +115,10 @@ def post_data(request):
         quantity = request.POST.get('quantity')
         url = request.POST.get('url')
         myfile = request.POST.get('myfile')
-        new_form.insert_one( { "session_id": request.user.username ,"Firstname": Name, "Email": Email, "date": date , "Birthday": Bdate, "description": description ,"quantity":quantity, "url": url ,"myfile": myfile } )
-        ob = new_form.find_one({ "session_id": request.user.username ,"Firstname": Name, "Email": Email, "date": date , "Birthday": Bdate, "description": description ,"quantity":quantity, "url": url ,"myfile": myfile })
+        new_form.insert_one( { "session_id": request.user.username ,"Name": Name, "Email": Email, "Date": date , "Bdate": Bdate, "description": description ,"quantity":quantity, "url": url ,"myfile": myfile } )
+        ob = new_form.find_one({ "session_id": request.user.username ,"Name": Name, "Email": Email, "Date": date , "Bdate": Bdate, "description": description ,"quantity":quantity, "url": url ,"myfile": myfile })
         print(str(ob['_id']))
-        new_form.update({'_id':ob['_id']},{ "session_id": request.user.username ,"Firstname": Name, "Email": Email, "date": date , "Birthday": Bdate, "description": description ,"quantity":quantity, "url": url ,"myfile": myfile ,'form_id':str(ob['_id'])})
+        new_form.update({'_id':ob['_id']},{ "session_id": request.user.username ,"Name": Name, "Email": Email, "Date": date , "Bdate": Bdate, "description": description ,"quantity":quantity, "url": url ,"myfile": myfile ,'form_id':str(ob['_id'])})
         collection1.insert_one({"session_id": request.user.username , "index": "1" ,"status": "pending.." , "form_id":str(ob['_id'])})
         
         return HttpResponseRedirect("/post_login")
@@ -291,6 +291,9 @@ def detailsofformid(request,form_id):
         for (reply,comment) in zip(data['reply'],data['comment']):
             tmp.append({"reply":reply,"comment":comment})
         data['conversation'] = tmp
+    ob = collection1.find_one({"form_id":form_id})
+    if ob is not None:
+        data['generated_by'] = ob['session_id']
     print(data)
     return render(request,"utility/formdetails.html",{'data':data})
 
@@ -470,13 +473,13 @@ def login_request(request):
 
 def check_(z):
     if z == "Name":
-        return 'Firstname'
+        return 'Name'
     elif z == "Email":
         return 'Email'
     elif z == "Date":
-        return 'date'
+        return 'Date'
     elif z == "Bdate":
-        return 'Birthday'
+        return 'Bdate'
     elif z == "myfile":
         return 'myfile'
     elif z == "quantity":
@@ -551,8 +554,8 @@ def admin(request):
     y = template.find( { "Name": "Admin" } )
     print(Total_fields)
     context ={}
-    context['number_of_fields'] = Total_fields
-    for i in range(1,Total_fields+1):
+    context['number_of_fields'] = 8
+    for i in range(1,9):
         print(i)
         context[f'field_name{i}'] = y[0][f'field_name{i}']
     if request.method == 'GET':
